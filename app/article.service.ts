@@ -14,7 +14,8 @@ export class ArticleService {
 
     constructor (private http: Http) {}
 
-    private baseUrl = 'http://localhost:8000/';
+    //private baseUrl = 'http://localhost:8000/';
+    private baseUrl = 'server.php/';
     private articlesUrl = this.baseUrl + 'articles/';
     private articlesByMandUrl = this.baseUrl + 'articlesByMand/';
     private typesUrl = this.baseUrl + 'types/';
@@ -52,7 +53,7 @@ export class ArticleService {
         // We'd also dig deeper into the error to get a better message
         let errMsg = (error.message) ? error.message :
             error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-        console.error(errMsg); // log to console instead
+
         return Observable.throw(errMsg);
     }
 }
