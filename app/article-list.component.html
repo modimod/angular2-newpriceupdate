@@ -1,0 +1,108 @@
+<div class="row">
+<div class="col-md-2">
+    <div class="btn-toolbar">
+        <button *ngFor="let mandant of mandants"
+            class="btn btn-primary"
+            [class.active]="mandant === selectedMandant"
+            (click)="onMandantSelect(mandant)">
+            {{mandant.desc}}
+        </button>
+    </div>
+</div>
+<div class="col-md-2">
+    <select class="form-control" [ngModel]="selectedType" (ngModelChange)="onTypeSelect($event)">
+        <option *ngFor="let type of types"
+            [ngValue]="type"
+            class="list-group-item"
+            [class.active]="type === selectedType">
+            {{type.artt_name}}
+        </option>
+    </select>
+</div>
+<div class="col-md-2">
+    <div class="checkbox">
+        <label><input #avail type="checkbox" (change)="onAvailableSelect(avail.checked)">Show also Not Available Articles</label>
+        <br>
+        <label><input #changed type="checkbox" (change)="onChangedSelect(changed.checked)">Show only changed articles</label>
+    </div>
+</div>
+<div class="col-md-2">
+    <div class="btn-group-vertical">
+        <button type="button" class="btn btn-primary" (click)="createSQL()">Create SQL</button>
+        <button type="button" class="btn" (click)="showPriceUpdate = !showPriceUpdate">Go to PriceUpdate</button>
+    </div>
+
+</div>
+<div class="col-md-2">
+    <div class="col-md-4">
+        <table class="table text-center">
+            <tr class="info">
+                <td>Changed</td>
+            </tr>
+            <tr class="success">
+                <td>Selected</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+</div>
+
+
+
+<div *ngIf="showPriceUpdate == false">
+
+    <div class="container-fluid">
+        <table class="table table-bordered table-striped table-condensed table-responsive table-hover">
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Reg</th>
+                <th>Fin</th>
+                <th>Type</th>
+                <th>Available</th>
+                <th>Mand</th>
+                <th>art_number</th>
+                <!--<th>supp_id</th>-->
+            </tr>
+            <tr *ngFor="let article of shownArticles" class="active"
+                [class.success]="article === selectedArticle"
+                [class.info]="isArticleChanged(article)"
+                (focusin)="onArticleSelect(article)"
+                (click)="onArticleSelect(article)">
+                <td>{{article.art_id}}</td>
+                <td>{{article.name}}</td>
+                <td><div>
+                    <label>{{article.reg_price}}</label>
+                    <input class="form-control" type="text" size="8" [(ngModel)]="article.new_reg_price" placeholder="new reg price"/>
+                    </div>
+                </td>
+                <td><div>
+                    <label>{{article.fin_price}}</label>
+                    <input class="form-control" type="text" size="8" [(ngModel)]="article.new_fin_price" placeholder="new fin price"/>
+                    </div>
+                </td>
+                <td>{{article.artt_name}}</td>
+                <td>
+                    <div class="checkbox">
+                        <label><input type="checkbox" [checked]="article.new_available == 'Y' ? true : false" (change)="onAvailableArticleSelect(article,$event)">{{article.available}}</label>
+                    </div>
+                </td>
+                <td>{{article.mand_id}}</td>
+                <td>{{article.art_number}}</td>
+                <!--<td>{{article.supp_id}}</td>-->
+                <td>
+                    <button type="button" class="btn btn-info" (click)="resetArticle(article)">Reset</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+<div *ngIf="showPriceUpdate == true">
+    <div class="row">
+    <div class="embed-responsive embed-responsive-4by3">
+        <iframe class="embed-responsive-item" src="http://price.int.aberger.at"></iframe>
+    </div>
+    </div>
+</div>
