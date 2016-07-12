@@ -147,9 +147,6 @@ export class ArticleListComponent implements OnInit {
         this.articleService.getArticlesByMand(mandant.id)
             .subscribe(
                 articles => {
-                    for (let i = 0;i<10;i++) {
-                        console.log(articles[i]);
-                    }
                     this.allArticles = this.allArticles.concat(articles);
                     this.filterArticles(articles);
                 }
@@ -211,14 +208,8 @@ export class ArticleListComponent implements OnInit {
             availCmd += 'arti_available = ' + article.new_available;
         }
 
-        let ret = base + priceCmd + availCmd + base2;
+        return base + priceCmd + availCmd + base2;
 
-        return ret;
-
-    }
-
-    goToPriceupdate(template) {
-        
     }
 
 }
