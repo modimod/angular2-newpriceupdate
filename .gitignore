@@ -2,8 +2,13 @@ typings
 app/**/*.js
 app/**/*.map
 node_modules
+dist
 jspm_packages
 bower_components
 .idea
 
 *.php
+
+temp
+
+*.gz

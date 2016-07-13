@@ -1,13 +1,14 @@
 {
-  "name": "angular2-quickstart",
+  "name": "pricetool",
   "version": "1.0.0",
   "scripts": {
-    "start": "tsc && concurrently \"npm run tsc:w\" \"npm run lite\" ",
-    "lite": "lite-server",
-    "postinstall": "typings install",
-    "tsc": "tsc",
-    "tsc:w": "tsc -w",
-    "typings": "typings"
+    "clean": "rm -rf dist",
+    "typings": "typings install",
+    "serve": "http-server . -p 5556",
+    "postinstall": "npm run typings",
+    "build": "npm run clean && tsc",
+    "build_prod": "npm run build && browserify -s main dist/main.js > dist/bundle.js && npm run minify",
+    "minify": "uglifyjs dist/bundle.js --screw-ie8 --compress --mangle --output dist/bundle.min.js"
   },
   "license": "ISC",
   "dependencies": {

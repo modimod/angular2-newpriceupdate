@@ -12,7 +12,7 @@ import {Modal, BS_MODAL_PROVIDERS} from 'angular2-modal/plugins/bootstrap';
 @Component({
     selector: 'my-article-list',
     templateUrl: 'app/article-list.component.html',
-    styleUrls: ['node_modules/bootstrap/dist/css/bootstrap.css'],
+    //styleUrls: ['node_modules/bootstrap/dist/css/bootstrap.css'],
     /*host: {
         '(document:keypress)': '_keypress($event)',
     },*/
@@ -85,10 +85,6 @@ export class ArticleListComponent implements OnInit {
         this.loadedMandants.push(MANDANTS[0]);
         this.getTypes();
         this.getArticlesByMandant(MANDANTS[0]);
-    }
-    
-    ngOnChanges() {
-        
     }
 
     filterArticles(articlesToFilter?: ArticleChanged[]) {
@@ -205,7 +201,7 @@ export class ArticleListComponent implements OnInit {
         let availCmd: string = '';
         if (article.available != article.new_available) {
             if (priceCmd != '')     availCmd += ', ';
-            availCmd += 'arti_available = ' + article.new_available;
+            availCmd += "arti_available = '" + article.new_available + "'";
         }
 
         return base + priceCmd + availCmd + base2;

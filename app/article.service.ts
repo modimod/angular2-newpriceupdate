@@ -17,8 +17,9 @@ export class ArticleService {
     //private baseUrl = 'http://localhost:8000/';
     private baseUrl = 'server.php/';
     private articlesUrl = this.baseUrl + 'articles/';
-    private articlesByMandUrl = this.baseUrl + 'articlesByMand/';
-    private typesUrl = this.baseUrl + 'types/';
+    private articlesByMandUrl = 'api/getArticlesByMand.php';
+    private typesUrl = 'api/getTypes.php';
+
 
     getArticles(): Observable<ArticleChanged[]> {
         return this.http.get(this.articlesUrl)
@@ -27,7 +28,7 @@ export class ArticleService {
     }
 
     getArticlesByMand(mand_id: number): Observable<ArticleChanged[]> {
-        return this.http.get(this.articlesByMandUrl + mand_id)
+        return this.http.get(this.articlesByMandUrl + '?id=' + mand_id)
             .map(this.extractData)
             .catch(this.handleError);
     }
@@ -40,12 +41,10 @@ export class ArticleService {
 
     private extractData(res: Response) {
         let body = <ArticleChanged[]>res.json();
-        
         return body || { };
     }
     private extractGroupData(res: Response) {
         let body = <Type[]>res.json();
-
         return body || { };
     }
     private handleError (error: any) {
