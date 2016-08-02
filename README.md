@@ -19,7 +19,7 @@ start development server:
     php -S localhost:8000
 
 
-I don't use a build-tool yet, so copy this to terminal:
+I don't use a build-tool yet, so copy this to terminal (command-group by command-group):
 
     cd $DIR/angular2-newpriceupdate
     rm -rf depl
